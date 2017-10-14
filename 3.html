@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="hd">
+<head>
+    <meta charset="UTF-8">
+    <title>声明模块与控制器规范与依赖注入</title>
+    <script src="node_modules/angular/angular.js"></script>
+</head>
+<body>
+    <div ng-controller="ctrl">
+        {{name}}
+    </div>
+</body>
+<script>
+    var m=angular.module('hd',[]);
+    m.controller('ctrl',['$scope',function ($scope) {
+        $scope.name='向军';
+    }]);
+ //为什么要向上面那样写呢？其实下面这种写法也可以，但是当时用js打包工具时
+    //形参$scope会被压缩成a等单字母，而angular容器依赖$scope注入，变成单字母后angular就不认识了
+    //因此采用依赖注入的形式 先[],然后里面写上也依赖$scope
+//    m.controller('ctrl',function ($scope) {
+//        $scope.name='向军';
+//    });
+</script>
+</html>
