@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>json数据转换与本地存储及$scope数据序列化提交后台</title>
+    <script src="node_modules/angular/angular.js"></script>
+</head>
+<body ng-app="hd" ng-controller="ctrl">
+{{data.name}}
+</body>
+<script>
+    var m=angular.module('hd',[]);
+    m.controller('ctrl',['$scope',function ($scope) {
+       // $scope.data={name:'houdunren'};
+        //localStorage.setItem('data',$scope.data);//由于是json格式，存储不了
+        //localStorage.setItem('data',angular.toJson($scope.data));//现在可以
+        console.log(localStorage.getItem('data'));//读取存储的数据
+        $scope.data=angular.fromJson(localStorage.getItem('data'));//json对象变成字符串
+    }]);
+</script>
+</html>
