@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>数据类型判断函数与数据比较方法的使用</title>
+    <script src="node_modules/angular/angular.js"></script>
+</head>
+<body ng-app="hd" ng-controller="ctrl">
+
+</body>
+<script>
+    var m=angular.module('hd',[]);
+    m.controller('ctrl',['$scope',function ($scope) {
+        var a;
+        console.log(angular.isDefined(a));//faslse
+        console.log(angular.isUndefined(a));//true
+        var b=99;
+        console.log(angular.isNumber(b));//true
+        console.log(angular.isString(b));//false
+        var d={};
+        console.log(angular.isObject(d));//true
+        e=document.getElementsByTagName('body').item(0);
+        console.log(angular.isElement(e));//true
+        f={name:9};
+        g={name:9};
+        console.log(angular.equals(f,g));//true
+    }]);
+</script>
+</html>
