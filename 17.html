@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ng-repeat</title>
+    <script src="node_modules/angular/angular.js"></script>
+</head>
+<body>
+    <div ng-app="hd" ng-controller="ctrl">
+        <!--$first为第一个 $last为最后一个 $middle为中间的 $even为偶数行 $odd 为奇数行-->
+        <li ng-repeat="(k,v) in data" style="{{$odd ? 'color:red;' : 'color:blue'}}">
+            名称：{{v.name}}  网址：{{v.url}}
+        </li>
+        <li ng-repeat="(k,v) in data">
+            <span ng-if="$first" style="color:red;">
+                名称：{{v.name}}  网址：{{v.url}}
+            </span>
+            <span ng-if="$middle" style="color:green;">
+                名称：{{v.name}}  网址：{{v.url}}
+            </span>
+            <span ng-if="$last" style="color:yellow;">
+                名称：{{v.name}}  网址：{{v.url}}
+            </span>
+        </li>
+        <li ng-repeat="v in data1 track by $index">
+            {{v}}
+        </li>
+    </div>
+</body>
+<script>
+    var m=angular.module('hd',[]);
+    m.controller('ctrl',['$scope',function ($scope) {
+        $scope.a=99;
+        $scope.data=[
+            {name:'百度',url:'www.baidu.com'},
+            {name:'腾讯',url:'www.tencent.com'},
+            {name:'谷歌',url:'www.google.com'},
+            {name:'雅虎',url:'www.yahoo.com'},
+            {name:'新浪',url:'www.sina.com'},
+        ];
+        $scope.data1=['百度','腾讯','谷歌','雅虎','新浪'];
+    }]);
+</script>
+</html>
