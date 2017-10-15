@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>表达式与ng-bind以及ng-cloak解决闪屏问题</title>
+    <script src="node_modules/angular/angular.js"></script>
+    <style>
+        .ng-cloak{
+            display: none;
+        }
+    </style>
+</head>
+<body ng-app="hd" ng-cloak class="ng-cloak">
+    <div ng-controller="ctrl">
+        {{name+'houdongern.cojm houdongwangl.com bbs.houdun.com'}}
+        <hr>
+        {{user.username+'=>'+user.url}}
+        <hr>
+        {{num*8}}
+        <hr>
+        <h3 ng-bind="name"></h3>
+    </div>
+<!--可以看到{{name}}和ng-bind="name"都能显示$scope下的name,那么什么时候用表达式，什么时候用指令呢-->
+<!--表达式后面可以随意的添加字符串  指令里面添加字符串比较繁琐一些-->
+<!--当网络加载延迟或者js文件按需加载时，表达式可能会出现没来得及解析的情况  花括号会闪烁一下-->
+<!--这时候，指令会好用一些-->
+<!--也可以使用ng-cloak解决表达式中花括号闪烁的问题-->
+<!--如果js文件按需加载，当执行到body处时，由于css关系，body隐藏，然后引入angular文件-->
+<!--angular会分析 ng-cloak指令  解析之后 再显示-->
+</body>
+<script>
+    var m=angular.module('hd',[]);
+    m.controller('ctrl',['$scope',function ($scope) {
+        $scope.name='后盾网';
+        $scope.num=2;
+        $scope.user={'username':'后盾人','url':'www.houdunren.com'};
+    }]);
+</script>
+</html>
