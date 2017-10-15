@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>函数使用对象扩充与数据遍历</title>
+    <script src="node_modules/angular/angular.js"></script>
+</head>
+<body ng-app="hd" ng-controller="ctrl">
+{{data}}
+{{data1}}
+</body>
+<script>
+    var m=angular.module('hd',[]);
+    m.controller('ctrl',['$scope',function ($scope) {
+        var obj={name:'后盾网'};
+        angular.extend(obj,{url:'houdunwang',web:'后盾人'});
+        console.log(obj);
+//        name :"后盾网"
+//        url: "houdunwang"
+//        web: "后盾人"
+        $scope.data=[
+            {name:'后盾网',url:'houdunwang'},
+            {name:'后盾人',url:'houdunren'},
+            {name:'百度',url:'baidu.com'},
+        ];
+        angular.forEach($scope.data,function (v,k) {
+            v.url='www'+v.url;
+            console.log(v);
+            //输出
+            //{name: "后盾网", url: "wwwhoudunwang"}
+            //{name: "后盾人", url: "wwwhoudunren"}
+            //{name: "百度", url: "wwwbaidu.com"}
+        });
+       data1= {name:'后盾网',url:'houdunwang'};
+        angular.forEach(data1,function (v,k) {
+           console.log(v);
+           //后盾网
+            // houdunwang
+        })
+    }]);
+</script>
+</html>
