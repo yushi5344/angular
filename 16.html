@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ng-if,ng-show,ng-disabled</title>
+    <script src="node_modules/angular/angular.js"></script>
+</head>
+<body ng-app="hd">
+    <div ng-controller="ctrl">
+        <input type="checkbox" ng-model="name">显示
+        <input type="checkbox" ng-model="status">接受协议
+        <button ng-init="copyright=false" ng-click="copyright=!copyright">查看协议</button>
+        <br>
+        <textarea name="" ng-show="copyright" id="" cols="30" rows="10"></textarea>
+        <br>
+        <button ng-disabled="!status">登录</button>
+        <div ng-show="name">hhhhh</div>
+        {{name}}
+        <div ng-if="name">hhhhh</div>
+    </div>
+
+</body>
+<!--ng-if和ng-show的区别：-->
+<!--虽然两个都是控制元素是否显示  但是ng-if是直接remove了这个元素 而ng-show只是设置它display为none-->
+<!--ng-show还有ng-hide为不显示-->
+<script>
+    var m=angular.module('hd',[]);
+    m.controller('ctrl',['$scope',function ($scope) {
+        
+    }]);
+</script>
+</html>
