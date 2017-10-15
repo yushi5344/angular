@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>表单的全选与反选</title>
+    <script src="node_modules/angular/angular.js"></script>
+</head>
+<body ng-app="hd">
+    <div ng-controller="ctrl">
+        <table border="1" width="500">
+            <tr>
+                <td>
+                    <input type="checkbox" ng-model="all">
+                    <span ng-bind="all? '取消' :'全选'"></span>
+                </td>
+                <td>标题</td>
+                <td>网址</td>
+            </tr>
+            <tr ng-repeat="v in data">
+                <td>
+                    <input type="checkbox" ng-checked="all">
+                </td>
+                <td>{{v.name}}</td>
+                <td>{{v.url}}</td>
+            </tr>
+        </table>
+    </div>
+</body>
+<script>
+    var m=angular.module('hd',[]);
+    m.controller('ctrl',['$scope',function ($scope) {
+        $scope.data=[
+            {name:'百度',url:'www.biaud.com'},
+            {name:'谷歌',url:'www.google.com'}
+        ];
+    }]);
+</script>
+</html>
