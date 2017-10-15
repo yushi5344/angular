@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>函数使用方法之大小写和对象深拷贝</title>
+    <script src="node_modules/angular/angular.js"></script>
+</head>
+<body ng-app="hd" ng-controller="ctrl">
+
+</body>
+<script>
+    var m=angular.module('hd',[]);
+    m.controller('ctrl',['$scope',function ($scope) {
+        console.log(angular.version);//查看angular版本
+//        输出
+//        codeName: "interdimensional-cable"
+//        dot :6
+//        full:"1.6.6"
+//        major:1
+//        minor: 6
+        console.log(angular.uppercase('houdunWANG'));//转换为大写
+        var obj={name:'后盾人'};
+        var obj2={};
+        angular.copy(obj,obj2);//深拷贝
+        obj2.name='后盾网';
+        console.log(obj2);
+    }]);
+</script>
+</html>
