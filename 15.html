@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ng-init与ng-trim</title>
+    <script src="node_modules/angular/angular.js"></script>
+</head>
+<body ng-app="hd">
+<div ng-controller="ctrl" ng-init="name='后盾人'">
+    <form action="">
+        标题：<input type="text" name="title" ng-trim ng-model="title"><br>
+        <input type="text" name="data"><br>
+        <input type="submit">
+    </form>
+    {{title}}
+</div>
+<!--ng-init是某个的初始值-->
+<!--当使用ng-model双向绑定时，$scope.title中的值会因为ng-model自动执行了ng-trim而去掉多余的空格-->
+<!--所以name=data的这个输入框里面的的值是没有空格的-->
+<!--而name=title的这个输入框里面还是有空格的-->
+<!--但是，如果input框的type是password,还是回自动保留空格  -->
+<!--其他输入框向继续保留空格 可以设置 ng-trim=false-->
+</body>
+<script>
+    var m=angular.module('hd',[]);
+    m.controller('ctrl',['$scope',function ($scope) {
+        $scope.title='';
+        $('form').submit(function () {
+            $("[name='data']").val($scope.title);
+        });
+    }]);
+</script>
+</html>
