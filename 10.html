@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>angular操作下拉列表框</title>
+    <script src="node_modules/angular/angular.js"></script>
+</head>
+<body ng-app="hd">
+    <div ng-controller="ctrl">
+        <select name="" ng-options="v.value as v.name for v in data" ng-model="city" id="">
+            <option value="">请选择城市</option>
+        </select>
+        {{city}}
+    </div>
+
+</body>
+<script>
+    var m=angular.module('hd',[]);
+    m.controller('ctrl',['$scope',function ($scope) {
+        $scope.city='beijing';
+        $scope.data=[
+            {name:'北京',value:'beijing'},
+            {name:'南京',value:'nanjing'},
+            {name:'长沙',value:'changsha'}
+        ];
+    }]);
+</script>
+</html>
