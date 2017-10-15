@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>angular控制复选框</title>
+    <script src="node_modules/angular/angular.js"></script>
+</head>
+<body ng-app="hd">
+    <div ng-controller="ctrl">
+        游戏：<input type="checkbox" ng-model="data.game" ng-true-value="1" ng-false-value="0">
+        电影：<input type="checkbox" ng-model="data.video" ng-true-value="1" ng-false-value="0">
+
+        <div ng-show="data.game==1">
+            <h1>游戏</h1>
+            <textarea name="" id="" cols="30" rows="10"></textarea>
+        </div>
+        <div ng-show="data.video==1">
+            <textarea name="" cols="30" rows="10"></textarea>
+        </div>
+        {{data}}
+    </div>
+</body>
+<script>
+    var m=angular.module('hd',[]);
+    m.controller('ctrl',['$scope',function ($scope) {
+        $scope.data={game:0,video:0};
+    }]);
+</script>
+</html>
