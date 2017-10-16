@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ng-style动态改变样式</title>
+    <script src="node_modules/angular/angular.js"></script>
+</head>
+<body ng-app="hd">
+    <div ng-controller="ctrl">
+        颜色：<input type="color" ng-model="color">
+        大小：<input type="number" ng-model="size">
+        <span ng-style="{color:color,fontSize:size+'px'}">百度</span>
+       <div>{{color}}</div>
+    </div>
+
+</body>
+<script>
+    var m=angular.module('hd',[]);
+    m.controller('ctrl',['$scope',function ($scope) {
+        $scope.color='red';
+    }]);
+</script>
+</html>
