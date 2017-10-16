@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>事件处理指令</title>
+    <script src="node_modules/angular/angular.js"></script>
+</head>
+<body ng-app="hd">
+    <div ng-controller="ctrl">
+        <!--<input type="text" ng-click="fun()">-->
+        <!--<input type="text" ng-dblclick="fun()">-->
+        <!--<input type="text" ng-change="fun()" ng-model="title">-->
+        <!--<input type="text" ng-focus="fun()" ng-model="title">-->
+        <input type="text" ng-keydown="fun()" ng-model="title">
+        <div>{{data}}</div>
+    </div>
+</body>
+<script>
+    var m=angular.module('hd',[]);
+    m.controller('ctrl',['$scope',function ($scope) {
+
+        $scope.fun=function () {
+            $scope.data ='百度';
+        }
+    }]);
+</script>
+</html>
