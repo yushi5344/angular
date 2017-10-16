@@ -1,0 +1,29 @@
+{
+  "name": "angular",
+  "version": "1.0.0",
+  "description": "learning angular",
+  "main": "index.js",
+  "dependencies": {
+    "angular": "^1.6.6",
+    "bootstrap": "^3.3.7",
+    "jquery": "^3.2.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yushi5344/angular.git"
+  },
+  "keywords": [
+    "angluar",
+    "learning"
+  ],
+  "author": "yushi5344",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/yushi5344/angular/issues"
+  },
+  "homepage": "https://github.com/yushi5344/angular#readme"
+}
