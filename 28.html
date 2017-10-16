@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>添加菜单处理</title>
+    <script src="node_modules/jquery/dist/jquery.js"></script>
+    <script src="node_modules/angular/angular.js"></script>
+    <script src="node_modules/bootstrap/dist/js/bootstrap.js"></script>
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.css">
+    <style>
+        .mobile{
+            border:solid 1px #999;
+            height:500px;
+            display: flex;
+        }
+        .mobile dl{
+            margin: 0;
+            padding:0;
+            display: flex;
+            flex: 1;
+            flex-direction: column-reverse;
+        }
+        .mobile dl dt{
+            background: #999;
+            color: #fff;
+            height:30px;
+            text-align: center;
+            border: 1px solid #f3f3f3;
+            line-height:2em;
+        }
+        .mobile dl dd{
+            display: flex;
+            flex-direction: column;
+        }
+        .mobile dl dd a{
+            border: solid 1px #f3f3f3;
+            text-align: center;
+            padding:5px;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+<div ng-app="hd" ng-controller="ctrl">
+    <form action="" method="post" class="form-horizontal">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-4 app">
+                    <div class="mobile">
+                        <dl ng-repeat="v in data.button">
+                            <dt ng-bind="v.name"></dt>
+                            <dd>
+                                <a href="" ng-repeat="d in v.sub_button" ng-bind="d.name">红警</a>
+                            </dd>
+                        </dl>
+                    </div>
+                </div>
+                <div class="col-xs-8">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">编辑</h3>
+                        </div>
+                        <div class="panel-body">
+                            <!--一级菜单开始-->
+                            <div class="panel panel-default" ng-repeat="v in data.button">
+                                <div class="panel-body">
+                                    <div class="form-group">
+                                        <label for="" class="col-sm-2 control-label">标题</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" class="form-control" ng-model="v.name">
+                                        </div>
+                                    </div>
+                                    <div class="form-group" ng-if="!v.sub_button">
+                                        <label for="" class="col-sm-2 control-label">类型</label>
+                                        <div class="col-sm-10">
+                                            <label for="" class="radio-inline">
+                                                <input type="radio" ng-model="v.type" value="click">关键词
+                                            </label>
+                                            <label for="" class="radio-inline">
+                                                <input type="radio" ng-model="v.type" value="view">网址
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="form-group" ng-if="v.type=='click' && !v.sub_button">
+                                        <label for="" class="col-sm-2 control-label">关键词</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" class="form-control" ng-model="v.key">
+                                        </div>
+                                    </div>
+                                    <div class="form-group" ng-if="v.type=='view' && !v.sub_button">
+                                        <label for="" class="col-sm-2 control-label">链接</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" class="form-control" ng-model="v.url">
+                                        </div>
+                                    </div>
+                                    <!--二级菜单开始-->
+                                    <div class="panel panel-default" ng-repeat="d in v.sub_button">
+                                        <div class="panel-body">
+                                            <div class="form-group">
+                                                <label for="" class="col-sm-2 control-label">标题</label>
+                                                <div class="col-sm-10">
+                                                    <input type="text" class="form-control" ng-model="d.name">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="" class="col-sm-2 control-label">类型</label>
+                                                <div class="col-sm-10">
+                                                    <label for="" class="radio-inline">
+                                                        <input type="radio" ng-model="d.type" value="click">关键词
+                                                    </label>
+                                                    <label for="" class="radio-inline">
+                                                        <input type="radio" ng-model="d.type" value="view">网址
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="form-group" ng-if="d.type=='click'">
+                                                <label for="" class="col-sm-2 control-label">关键词</label>
+                                                <div class="col-sm-10">
+                                                    <input type="text" class="form-control" ng-model="d.key">
+                                                </div>
+                                            </div>
+                                            <div class="form-group" ng-if="d.type=='view'">
+                                                <label for="" class="col-sm-2 control-label">链接</label>
+                                                <div class="col-sm-10">
+                                                    <input type="text" class="form-control" ng-model="d.url">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--二级菜单结束-->
+                                    <button type="button" class="btn btn-info" ng-click="addSubMenu(v)">添加菜单</button>
+                                    </div>
+                                </div>
+                            <!--一级菜单结束-->
+                            <button type="button" class="btn btn-success" ng-click="addTopMenu()">添加一级菜单</button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+
+</div>
+</body>
+<script>
+    var m=angular.module('hd',[]);
+    m.controller('ctrl',['$scope',function ($scope) {
+        $scope.data={
+            "button":[
+                {
+                    "type":"click",
+                    "name":"今日歌曲",
+                    "key":"V1001_TODAY_MUSIC"
+                },
+                {
+                    "type":"view",
+                    "name":"百度",
+                    "url":"http://www.baidu.com",
+                    "sub_button":[
+                        {
+                            "type":"view",
+                            "name":"百度知道",
+                            "url":"http://www.soso.com/"
+                        },
+                        {
+                            "type":"view",
+                            "name":"百度音乐",
+                            "url":"http://mp.weixin.qq.com",
+                            "appid":"wx286b93c14bbf93aa",
+                            "pagepath":"pages/lunar/index"
+                        },
+                    ],
+                },
+                {
+                    "name":"菜单",
+                    "sub_button":[
+                        {
+                            "type":"view",
+                            "name":"搜索",
+                            "url":"http://www.soso.com/"
+                        },
+                        {
+                            "type":"miniprogram",
+                            "name":"wxa",
+                            "url":"http://mp.weixin.qq.com",
+                            "appid":"wx286b93c14bbf93aa",
+                            "pagepath":"pages/lunar/index"
+                        },
+                        {
+                            "type":"click",
+                            "name":"赞一下我们",
+                            "key":"V1001_GOOD"
+                        }
+                    ]
+                }
+            ]
+        };
+        $scope.addTopMenu=function () {
+            var menu={
+                    "type":"click",
+                    "name":"",
+                    "key":""
+                };
+            if ($scope.data.button.length==3){
+                alert('一级菜单最多三个');
+            }else{
+                $scope.data.button.push(menu);
+            }
+        };
+        $scope.addSubMenu=function (item) {
+            var menu={
+                "type":"click",
+                "name":"",
+                "key":""
+            };
+            if(!item.sub_button){
+                item.sub_button=[];
+            }
+            if(item.sub_button.length==5){
+                alert('二级菜单最多5个');
+            }else{
+                item.sub_button.push(menu);
+            }
+        }
+    }]);
+</script>
+</html>
