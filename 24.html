@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>flex弹性盒模型 微信菜单手机界面布局</title>
+    <script src="node_modules/jquery/dist/jquery.js"></script>
+    <script src="node_modules/angular/angular.js"></script>
+    <script src="node_modules/bootstrap/dist/js/bootstrap.js"></script>
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.css">
+    <style>
+        .mobile{
+            border:solid 1px #999;
+            height:500px;
+            display: flex;
+        }
+        .mobile dl{
+            margin: 0;
+            padding:0;
+            display: flex;
+            flex: 1;
+            flex-direction: column-reverse;
+        }
+        .mobile dl dt{
+            background: #999;
+            color: #fff;
+            height:30px;
+            text-align: center;
+            border: 1px solid #f3f3f3;
+            line-height:2em;
+        }
+        .mobile dl dd{
+            display: flex;
+            flex-direction: column;
+        }
+        .mobile dl dd a{
+            border: solid 1px #f3f3f3;
+            text-align: center;
+            padding:5px;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+<div ng-app="hd" ng-controller="ctrl">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-4 app">
+                <div class="mobile">
+                    <dl>
+                        <dt>游戏</dt>
+                        <dd>
+                            <a href="">红警</a>
+                            <a href="">全名突击</a>
+                        </dd>
+                    </dl>
+                    <dl>
+                        <dt>电影</dt>
+                        <dd>
+                            <a href="">情爱的</a>
+                            <a href="">爱情公寓</a>
+                            <a href="">情爱的</a>
+                            <a href="">爱情公寓</a>
+                        </dd>
+                    </dl>
+                    <dl>
+                        <dt>电影</dt>
+                        <dd>
+                            <a href="">情爱的</a>
+                            <a href="">爱情公寓</a>
+                            <a href="">情爱的</a>
+                            <a href="">爱情公寓</a>
+                        </dd>
+                    </dl>
+                </div>
+            </div>
+            <div class="col-xs-8">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">编辑</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<script>
+    var m=angular.module('hd',[]);
+    m.controller('ctrl',['$scope',function ($scope) {
+
+    }]);
+</script>
+</html>
