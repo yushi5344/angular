@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>变量调节器与货币变量调节器</title>
+    <script src="node_modules/angular/angular.js"></script>
+</head>
+<body ng-app="hd" ng-controller="ctrl">
+{{price|currency:'￥':1}}
+<br>
+{{price|number:2}}
+<br>
+{{name|uppercase|lowercase}}
+<br>
+{{title|limitTo:2:1}} <!-- 从第（1+1）个字开始  截取2个-->
+</body>
+<script>
+    var m=angular.module('hd',[]);
+    m.controller('ctrl',['$scope',function ($scope) {
+        $scope.name='aaaaaaa';
+        $scope.price='12323.456';
+        $scope.title='今天是个好日子，开心的事儿都很多';
+    }]);
+</script>
+</html>
