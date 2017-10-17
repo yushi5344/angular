@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>$scope与过滤器结合制作表格升降排序</title>
+    <script src="node_modules/angular/angular.js"></script>
+</head>
+<body ng-app="hd" ng-controller="ctrl">
+    <table border="1" width="600">
+        <tr>
+            <th ng-click="orderby('id')">编号
+                <span ng-if="status.id">升序</span>
+                <span ng-if="!status.id">升序</span>
+            </th>
+            <th ng-click="orderby('click')">点击数
+                <span ng-if="status.click">升序</span>
+                <span ng-if="!status.click">升序</span>
+            </th>
+            <th ng-click="orderby('title')">标题
+                <span ng-if="status.title">升序</span>
+                <span ng-if="!status.title">升序</span>
+            </th>
+        </tr>
+        <tr ng-repeat="v in data">
+            <td>{{v.id}}</td>
+            <td>{{v.click}}</td>
+            <td>{{v.title}}</td>
+        </tr>
+    </table>
+{{status.id}}
+</body>
+<script>
+    var m=angular.module('hd',[]);
+    m.controller('ctrl',['$scope','$filter',function ($scope,$filter) {
+        $scope.data=[
+            {id:1,click:100,title:'百度'},
+            {id:2,click:200,title:'谷歌'},
+            {id:3,click:300,title:'新浪百度'}
+        ];
+        $scope.status={id:false,click:false,title:false};
+        $scope.orderby=function (field) {
+            $scope.status[field]=!$scope.status[field];
+            $scope.data=$filter('orderBy')($scope.data,field,$scope.status[field]);
+        }
+    }]);
+</script>
+</html>
