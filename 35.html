@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>date过滤器处理时间</title>
+    <script src="node_modules/angular/angular.js"></script>
+</head>
+<body ng-app="hd" ng-controller="ctrl">
+{{time|date:'yyyy年MM月dd日 HH:mm:ss'}}
+</body>
+<script>
+    var m=angular.module('hd',[]);
+    m.controller('ctrl',['$scope',function ($scope) {
+        $scope.time=new Date().getTime();
+    }]);
+</script>
+</html>
