@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>自定义指令之trancclude,templateUrl属性</title>
+    <script src="node_modules/angular/angular.js"></script>
+    <script src="node_modules/jquery/dist/jquery.js"></script>
+</head>
+<body ng-app="hd" ng-controller="ctrl">
+    <div gm-cms></div>
+</body>
+<script>
+    var m=angular.module('hd',[]);
+    //驼峰命名规则  gmCms 在html中 gm-cms
+    m.directive('gmCms',[function () {
+        return{
+            restrict:'EA',//a -attr  e-element
+           // template:'<h1>国民</h1>',
+            replace:true,
+            templateUrl:'./view/1.html'
+        }
+        // 当使用replace时，模板文件一定要有一级块标签
+    }]);
+    m.controller('ctrl',['$scope','$filter',function ($scope,$filter) {
+
+    }]);
+</script>
+</html>
