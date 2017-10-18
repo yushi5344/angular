@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>自定义指令之replace属性</title>
+    <script src="node_modules/angular/angular.js"></script>
+    <script src="node_modules/jquery/dist/jquery.js"></script>
+</head>
+<body ng-app="hd" ng-controller="ctrl">
+    <gm-cms></gm-cms>
+</body>
+<script>
+    var m=angular.module('hd',[]);
+    //驼峰命名规则  gmCms 在html中 gm-cms
+    m.directive('gmCms',[function () {
+        return{
+            restrict:'E',//a -attr  e-element
+            template:'<h1>国民</h1>',
+            replace:false
+        }
+        // 当replace属性为false时<gm-cms><h1>国民</h1></gm-cms>
+        // 当replace属性为true时<h1>国民</h1>
+    }]);
+    m.controller('ctrl',['$scope','$filter',function ($scope,$filter) {
+
+    }]);
+</script>
+</html>
