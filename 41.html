@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>$swtch和$filter过滤器治国数据筛选示例</title>
+    <script src="node_modules/angular/angular.js"></script>
+</head>
+<body ng-app="hd" ng-controller="ctrl">
+    搜索 <input type="text" ng-model="search">
+    <table border="1" width="600">
+        <tr>
+            <th>编号</th>
+            <th>点击数</th>
+            <th>标题</th>
+        </tr>
+        <tr ng-repeat="v in lists">
+            <td>{{v.id}}</td>
+            <td>{{v.click}}</td>
+            <td>{{v.title}}</td>
+        </tr>
+    </table>
+</body>
+<script>
+    var m=angular.module('hd',[]);
+    m.controller('ctrl',['$scope','$filter',function ($scope,$filter) {
+        $scope.data=[
+            {id:1,click:100,title:'百度'},
+            {id:2,click:200,title:'新浪'},
+            {id:3,click:300,title:'百度人'}
+        ];
+        //用于临时数据
+        $scope.lists=$scope.data;
+        $scope.$watch('search',function (newVal) {
+            $scope.lists=$filter('filter')($scope.data,newVal);
+        });
+    }]);
+</script>
+</html>
