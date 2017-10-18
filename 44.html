@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>自定义指令之directive的template属性</title>
+    <script src="node_modules/angular/angular.js"></script>
+    <script src="node_modules/jquery/dist/jquery.js"></script>
+</head>
+<body ng-app="hd" ng-controller="ctrl">
+    <div gm-cms color="green">你好</div>
+</body>
+<script>
+    var m=angular.module('hd',[]);
+    //驼峰命名规则  gmCms 在html中 gm-cms
+    m.directive('gmCms',[function () {
+        return{
+            restrict:'AEC',//a -attr  e-element
+            template:function (elem,attr) {
+                return "<span style='color: "+attr['color']+"'>"+$(elem).html()+"</span>";
+            }
+        }
+    }]);
+    m.controller('ctrl',['$scope','$filter',function ($scope,$filter) {
+
+    }]);
+</script>
+</html>
