@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>自定义过滤器之手机加*</title>
+    <script src="node_modules/angular/angular.js"></script>
+</head>
+<body ng-app="hd" ng-controller="ctrl">
+    <table border="1" width="600">
+        <tr>
+            <th>编号</th>
+            <th>名称</th>
+            <th>手机</th>
+        </tr>
+        <tr ng-repeat="v in data">
+            <td>{{v.id}}</td>
+            <td>{{v.name}}</td>
+            <td>{{v.mobile|truncate:4}}</td>
+        </tr>
+    </table>
+</body>
+<script>
+    var m=angular.module('hd',[]);
+    m.filter('truncate',function () {
+        return function (mobile,len) {
+            len= len ? len :3;
+            return mobile.substr(0,11-len)+new String("*").repeat(len);
+        }
+    });
+    m.controller('ctrl',['$scope','$filter',function ($scope,$filter) {
+        $scope.data=[
+            {id:1,name:'张三',mobile:'13893404506'},
+            {id:2,name:'李四',mobile:'17092559941'},
+            {id:3,name:'王五',mobile:'15043234567'}
+        ];
+    }]);
+</script>
+</html>
