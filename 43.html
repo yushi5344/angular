@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>自定义指令之directive的restricet属性</title>
+    <script src="node_modules/angular/angular.js"></script>
+</head>
+<body ng-app="hd" ng-controller="ctrl">
+    <div gm></div>
+    <hr>
+    <gm></gm>
+</body>
+<script>
+    var m=angular.module('hd',[]);
+    m.directive('gm',[function () {
+        return{
+            restrict:'AE',//a -attr  e-element
+            template:'这是自定义指令'
+        }
+    }]);
+    m.controller('ctrl',['$scope','$filter',function ($scope,$filter) {
+
+    }]);
+</script>
+</html>
