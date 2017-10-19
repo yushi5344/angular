@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>scope作用域分析之&调用父作用域中函数</title>
+    <script src="node_modules/angular/angular.js"></script>
+    <script src="node_modules/jquery/dist/jquery.js"></script>
+</head>
+<body ng-app="hd" ng-controller="ctrl">
+    <h1 gm-cms color="callback()"></h1>
+    <hr>
+</body>
+<script>
+    var m=angular.module('hd',[]);
+    //驼峰命名规则  gmCms 在html中 gm-cms
+    m.directive('gmCms',[function () {
+        return{
+            restrict:'EAC',//a -attr  e-element
+           // template:'<h1>国民</h1>',
+            //replace:true,
+           //templateUrl:'./view/1.html'
+            template:'<h3>{{color()}}</h3>',
+            scope:{color:'&color'},
+        }
+        // 当scope为false时，指令 ng-model互相影响，共享数据
+        //当scope为true时,scope分离，ng-model会影响到gm-cms 但是gm-cms不会影响ng-model
+        //当scope为{}时相互独立
+    }]);
+    m.controller('ctrl',['$scope','$filter',function ($scope,$filter) {
+        $scope.name='国民';
+        $scope.color='red';
+        $scope.callback=function () {
+            return '百度';
+        }
+    }]);
+</script>
+</html>
