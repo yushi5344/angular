@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>directive的controller属性</title>
+    <script src="node_modules/angular/angular.js"></script>
+    <script src="node_modules/jquery/dist/jquery.js"></script>
+</head>
+<body ng-app="hd">
+    <gm-cms></gm-cms>
+    <hr>
+</body>
+<script>
+    var m=angular.module('hd',[]);
+    //驼峰命名规则  gmCms 在html中 gm-cms
+    m.directive('gmCms',[function () {
+        return{
+            restrict:'E',//a -attr  e-element
+           // template:'<h1>国民</h1>',
+            //replace:true,
+           //templateUrl:'./view/1.html'
+//            template:'<h3>{{color()}}</h3>',
+//            scope:{color:'&color'},
+            replace:true,
+            templateUrl:'view/2.html',
+            controller:['$scope',function ($scope) {
+                $scope.data=[
+                    {id:1,name:'百度'},
+                    {id:1,name:'百度'},
+                    {id:1,name:'百度'},
+                ];
+            }]
+        }
+        // 当scope为false时，指令 ng-model互相影响，共享数据
+        //当scope为true时,scope分离，ng-model会影响到gm-cms 但是gm-cms不会影响ng-model
+        //当scope为{}时相互独立
+    }]);
+//    m.controller('ctrl',['$scope','$filter',function ($scope,$filter) {
+//        $scope.name='国民';
+//        $scope.color='red';
+//        $scope.callback=function () {
+//            return '百度';
+//        }
+//    }]);
+</script>
+</html>
