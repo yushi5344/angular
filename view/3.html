@@ -1,0 +1,28 @@
+<div class="hd-tab">
+    <style>
+        .hd-tab a{
+            padding:6px 10px;
+            border-right:solid 2px #aaa;
+            text-decoration: none;
+            display: inline-block;
+            color: #666666;
+        }
+        .hd-tab a.active{
+            background: #aaa;
+            color: #fff;
+        }
+        .hd-tab div.lists{
+            border:solid 2px #aaa;
+            padding:20px;
+            width: 300px;
+            height:200px;
+            margin-top:-2px;
+        }
+    </style>
+    <a href="" ng-class="{active:$first}" ng-repeat="v in data">{{v.title}}</a>
+    <div class="lists"ng-repeat="v in data" ng-style="{display:$first ? 'block' : 'none'}">
+        <ul>
+            <li ng-repeat="m in v.data">{{m.title}}</li>
+        </ul>
+    </div>
+</div>
