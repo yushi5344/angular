@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>$apply进行数据脏检查 </title>
+    <script src="node_modules/angular/angular.js"></script>
+    <script src="node_modules/jquery/dist/jquery.js"></script>
+</head>
+<body ng-app="hd" ng-controller="ctrl">
+    {{name}}
+    <button ng-click="callback()">事件</button>
+    <hr>
+    <button id="bt">jquery处理</button>
+</body>
+<script>
+    var m=angular.module('hd',[]);
+    m.controller('ctrl',['$scope',function ($scope) {
+        $scope.name='百度';
+        $('#bt').click(function () {
+            $scope.name='baidu';
+            $scope.$apply();
+        });
+    }]);
+</script>
+</html>
