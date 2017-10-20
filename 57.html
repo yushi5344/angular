@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>$cacheFactory 的缓存实例 </title>
+    <script src="node_modules/angular/angular.js"></script>
+    <script src="node_modules/jquery/dist/jquery.js"></script>
+</head>
+<body ng-app="hd">
+    <div ng-controller="ctrl1">
+        {{data}}
+    </div>
+    <div ng-controller="ctrl2">
+        {{data}}
+    </div>
+
+</body>
+<script>
+    var m=angular.module('hd',[]);
+    m.controller('ctrl1',['$scope','$cacheFactory',function ($scope,$cacheFactory) {
+        var obj=$cacheFactory('hda');
+        obj.put('web',{name:'后盾人',url:'www.baidu.com'});
+        obj.put('user',{name:'百度',mail:'yushi@qq.com'});
+        $scope.data=obj.get('web').name;
+    }]);
+    m.controller('ctrl2',['$scope','$cacheFactory',function ($scope,$cacheFactroy) {
+        var obj=$cacheFactroy.get('hda');
+        $scope.data=obj.get('web').name;
+    }]);
+</script>
+</html>
