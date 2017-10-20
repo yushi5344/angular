@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>$window的使用场景 </title>
+    <script src="node_modules/angular/angular.js"></script>
+    <script src="node_modules/jquery/dist/jquery.js"></script>
+</head>
+<body ng-app="hd" ng-controller="ctrl">
+<a href="" ng-click="get()">get</a>
+    <hr>
+    {{message}}
+<hr>
+<a href="" ng-click="getScrollHeight()">获取内容高度</a>
+内容区显示高度是{{sccrollHeight}}
+<hr>
+<a href="" ng-click="prompt()">请输入内容</a>
+您输入的内容时{{content}}
+<hr>
+<a href="" ng-click="getClientHeight()">获取内容高度</a>
+内容区显示高度是{{clientHeight}}
+{{id}}
+</body>
+<script>
+    var m=angular.module('hd',[]);
+    m.controller('ctrl',['$scope','$window',function ($scope,$window) {
+        $scope.get=function () {
+            if($window.confirm('确定操作嘛')){
+                $scope.message='确定';
+            }else{
+                $scope.message='取消';
+            }
+        }
+        $scope.getScrollHeight=function () {
+            $scope.sccrollHeight=$window.document.body.scrollHeight;
+        }
+        $scope.getClientHeight=function () {
+            $scope.clientHeight=$window.document.body.clientHeight;
+        }
+        $scope.prompt=function () {
+            $scope.content=$window.prompt('请输入内容');
+        }
+    }]);
+</script>
+</html>
