@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>使用service创建自定义服务</title>
+    <script src="node_modules/angular/angular.js"></script>
+    <script src="node_modules/jquery/dist/jquery.js"></script>
+</head>
+<body ng-app="hd">
+<div ng-controller="ctrl">
+    <table border="1" width="600">
+        <tr>
+            <th>编号</th>
+            <th>名称</th>
+        </tr>
+        <tr ng-repeat="v in data">
+            <td>{{v.id}}</td>
+            <td>{{v.name}}</td>
+        </tr>
+    </table>
+</div>
+
+</body>
+<script>
+    var m=angular.module('hd',[]);
+    m.service('videoserver',['$http',function($http){
+        this.get=function(){
+            return $http({
+                method:'post',
+                url:'view/1.php'
+            }).then(function(resoponse){
+                return resoponse.data;
+            });
+        }
+    }]);
+    m.controller('ctrl',['$scope','videoserver',function($scope,videoserver){
+        videoserver.get().then(function(data){
+            $scope.data=data;
+        });
+    }]);
+</script>
+</html>
