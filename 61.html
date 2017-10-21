@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>多个控制器共享server数据</title>
+    <script src="node_modules/angular/angular.js"></script>
+    <script src="node_modules/jquery/dist/jquery.js"></script>
+</head>
+<body ng-app="hd">
+<div ng-controller="ctrl1">
+    <table border="1" width="600">
+        <tr>
+            <th>编号</th>
+            <th>名称</th>
+        </tr>
+        <tr ng-repeat="v in data">
+            <td>{{v.id}}</td>
+            <td>{{v.name}}</td>
+        </tr>
+    </table>
+</div>
+<div ng-controller="ctrl2">
+    <table border="1" width="600">
+        <tr>
+            <th>编号</th>
+            <th>名称</th>
+        </tr>
+        <tr>
+            <td>{{data2.id}}</td>
+            <td>{{data2.name}}</td>
+        </tr>
+    </table>
+</div>
+</body>
+<script>
+    var m=angular.module('hd',[]);
+    m.factory('videoserver',['$http',function($http){
+        var obj={
+            get:function(callback){
+                $http({
+                    url:'view/1.php',
+                    method:'post'
+                }).then(function(response){
+                    callback(response);
+                });
+            },
+            all:function(){
+                return $http({
+                    url:'view/1.php',
+                    method:'post'
+                }).then(function(response){
+                    return response.data;
+                });
+            },
+            find:function(id){
+                return this.all().then(function(data){
+                    for (var i=0;i<data.length;i++){
+                        if (data[i].id==id){
+                            return data[i];
+                        }
+                    }
+                });
+            }
+        };
+        return obj;
+    }]);
+    m.controller('ctrl1',['$scope','videoserver',function ($scope,videoserver) {
+//        videoserver.get(function(response){
+//            $scope.data=response.data;
+//        });
+        videoserver.all().then(function(response){
+            $scope.data=response;
+            console.log(response);
+        });
+    }]);
+    m.controller('ctrl2',['$scope','videoserver',function($scope,videoserver){
+        videoserver.all().then(function(data){
+            $scope.data=data;
+        });
+        videoserver.find(1).then(function(data){
+            $scope.data2=data;
+            console.log($scope.data2);
+        });
+    }]);
+</script>
+</html>
