@@ -1,0 +1,14 @@
+<div>
+    aaaaa
+    <!--<div ng-click="go('lists')">跳转到百度</div>-->
+    <table border="1" width="600">
+        <tr>
+            <th>编号</th>
+            <th>名称</th>
+        </tr>
+        <tr ng-repeat="v in data">
+            <td>{{v.id}}</td>
+            <td><a href="" ui-sref="user({id:v.id})">{{v.name}}</a></td>
+        </tr>
+    </table>
+</div>
