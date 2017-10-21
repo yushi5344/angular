@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ui router路由控制器中执行路由跳转方法</title>
+    <script src="node_modules/angular/angular.js"></script>
+    <script src="node_modules/jquery/dist/jquery.js"></script>
+    <script src="node_modules/angular-ui-router/release/angular-ui-router.js"></script>
+</head>
+<body ng-app="hd">
+<div>
+    <a href="" ui-sref="home">首页</a>
+    <a href="" ui-sref="lists">列表页</a>
+   <div ui-view></div>
+</div>
+
+</body>
+<script>
+    var m=angular.module('hd',['ui.router']);
+    m.config(['$stateProvider','$urlRouterProvider',function ($stateProvider,$urlRouterProvider) {
+        //默认路由
+        $urlRouterProvider.otherwise('/hd');
+        //定义路由规则
+        $stateProvider
+            .state('default',{
+                url:'/hd',
+                template:'<h1>UI-router</h1>'
+            })
+            .state('home',{
+                url:'/home',
+                templateUrl:'view/home1.html',
+                controller:'ctrl'
+            })
+            .state('lists',{
+                url:'/lists',
+                template:'<h1>列表页</h1>'
+            })
+
+    }]);
+    m.controller('ctrl',['$scope','$state',function ($scope,$state) {
+        $scope.name='百度';
+        $scope.go=function (url) {
+            $state.go(url);
+        }
+    }]);
+</script>
+</html>
