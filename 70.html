@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ui router路由参数定义超灵活嵌套路由</title>
+    <script src="node_modules/angular/angular.js"></script>
+    <script src="node_modules/jquery/dist/jquery.js"></script>
+    <script src="node_modules/angular-ui-router/release/angular-ui-router.js"></script>
+</head>
+<body ng-app="hd">
+<div>
+    <div ui-view="top"></div>
+    <div ui-view="left"></div>
+    <div ui-view="right"></div>
+</div>
+
+</body>
+<script>
+    var m=angular.module('hd',['ui.router']);
+    m.config(['$stateProvider','$urlRouterProvider',function ($stateProvider,$urlRouterProvider) {
+        //默认路由
+        $urlRouterProvider.otherwise('/my');
+        //定义路由规则
+        $stateProvider
+//            .state('default',{
+//                url:'/hd',
+//                template:'<h1>UI-router</h1>'
+//            })
+            .state('my',{
+                url:'/my',
+                views:{
+                    top:{
+                         templateUrl:'view/top.html'
+                    },
+                    left:{
+                        templateUrl:'view/menu.html'
+                    },
+                    right:{
+                        templateUrl:'view/about.html'
+                    }
+                }
+            })
+            .state('video',{
+                url:'/home',
+                views:{
+                    top:{
+                        templateUrl:'view/top.html'
+                    },
+                    left:{
+                        templateUrl:'view/menu.html'
+                    },
+                    right:{
+                        templateUrl:'view/videolist.html'
+                    }
+                }
+            })
+
+    }]);
+</script>
+</html>
