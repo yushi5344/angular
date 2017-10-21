@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>factory创建服务 </title>
+    <script src="node_modules/angular/angular.js"></script>
+    <script src="node_modules/jquery/dist/jquery.js"></script>
+</head>
+<body ng-app="hd">
+<div ng-controller="ctrl">
+    <table border="1" width="600">
+        <tr>
+            <th>编号</th>
+            <th>名称</th>
+        </tr>
+        <tr ng-repeat="v in data">
+            <td>{{v.id}}</td>
+            <td>{{v.name}}</td>
+        </tr>
+    </table>
+</div>
+
+</body>
+<script>
+    var m=angular.module('hd',[]);
+    m.factory('videoserver',['$http',function($http){
+        return {
+            get:function(callback){
+                $http({
+                    url:'view/1.php',
+                    method:'post'
+                }).then(function(response){
+                    callback(response);
+                });
+            },
+            all:function(){
+                return $http({
+                    url:'view/1.php',
+                    method:'post'
+                });
+            }
+        };
+    }]);
+    m.controller('ctrl',['$scope','videoserver',function ($scope,videoserver) {
+//        videoserver.get(function(response){
+//            $scope.data=response.data;
+//        });
+        videoserver.all().then(function(response){
+            $scope.data=response.data;
+        });
+    }]);
+</script>
+</html>
