@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ui router路由参数定义高效的父子嵌套路由</title>
+    <script src="node_modules/angular/angular.js"></script>
+    <script src="node_modules/jquery/dist/jquery.js"></script>
+    <script src="node_modules/angular-ui-router/release/angular-ui-router.js"></script>
+</head>
+<body ng-app="hd">
+<div>
+
+   <div ui-view></div>
+</div>
+
+</body>
+<script>
+    var m=angular.module('hd',['ui.router']);
+    m.config(['$stateProvider','$urlRouterProvider',function ($stateProvider,$urlRouterProvider) {
+        //默认路由
+        $urlRouterProvider.otherwise('/home');
+        //定义路由规则
+        $stateProvider
+//            .state('default',{
+//                url:'/hd',
+//                template:'<h1>UI-router</h1>'
+//            })
+            .state('home',{
+                url:'/home',
+                templateUrl:'view/home4.html',
+//                controller:'ctrl'
+            })
+            .state('lists',{
+                url:'/lists',
+                template:'<h1>列表页</h1>'
+            })
+            .state('user',{
+                url:'/user/{id}',
+                template:'<h1>用户详情</h1>',
+                controller:'ctrl2'
+            })
+            //第一种方式home.news
+            .state('home.news',{
+                url:'/news',
+                template:'<h1>新闻</h1>'
+            })
+            //第二种方式 parent
+            .state('game',{
+                url:'/game',
+                parent:'home',
+                template:'<h1>游戏</h1>'
+            })
+
+    }]);
+</script>
+</html>
